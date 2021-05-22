@@ -6,6 +6,7 @@ body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
 		Helvetica Neue, sans-serif;
+	-ms-overflow-style: none;
 }
 
 a {
@@ -15,4 +16,14 @@ a {
 
 * {
 	box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+.box {
+	-ms-overflow-style: none;
+}
+.box::-webkit-scrollbar {
+	display: none;
 }

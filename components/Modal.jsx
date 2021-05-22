@@ -9,7 +9,7 @@ const ModalWrapper = styled.div`
 		left: 0;
 		bottom: 0;
 		right: 0;
-		background-color: rgba(61, 61, 61, 0.479);
+		background-color: rgba(0, 0, 0, 0.3);
 	}
 	.modal {
 		position: fixed;
@@ -37,25 +37,38 @@ const ModalWrapper = styled.div`
 			font-family: 'Noto Sans KR', sans-serif;
 			font-weight: 700;
 			font-size: 26px;
+			color: #000000;
 		}
 	}
 
 	.group-info {
 		width: 338px;
 		height: 169px;
-		margin-top: 34px;
 		padding-top: 28px;
 		padding-left: 28px;
+		margin-top: 34px;
 		background: #f4f4f4;
 		border-radius: 20px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		/* overflow-y: scroll; */
+		overflow-y: scroll;
+		color: #000000;
+
+		&__box {
+			display: flex;
+			flex-direction: column;
+			margin-top: 70px;
+		}
 
 		&__name {
 			margin-bottom: 16px;
 			font-size: 18px;
+		}
+
+		& p {
+			display: inline;
+			margin-left: 8px;
 		}
 	}
 
@@ -100,29 +113,28 @@ const ModalWrapper = styled.div`
 const groups = [
 	{
 		groupIdx: 1,
-		groupName: 'SOPT 1',
+		groupName: 'SOPT',
 	},
 	{
 		groupIdx: 2,
-		groupName: 'SOPT 2',
+		groupName: '솝커톤 9조',
 	},
 	{
 		groupIdx: 3,
-		groupName: 'SOPT 3',
+		groupName: '궁금궁금',
 	},
 	{
 		groupIdx: 4,
-		groupName: 'SOPT 4',
+		groupName: '솝트',
 	},
-	// {
-	// 	groupIdx: 5,
-	// 	groupName: '솝트 5',
-	// },
+	{
+		groupIdx: 5,
+		groupName: '솝트 5',
+	},
 ];
 
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
 	const [confirmClicked, setConfirmClicked] = useState(false);
-	const [showForm, setShowForm] = useState(false);
 
 	const handleConfirm = () => {
 		setConfirmClicked(true);
@@ -141,14 +153,16 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
 						<div className="modal-form__title">그룹에 공유</div>
 						<Image src="/assets/images/ModalFish.svg" alt="" width="158px" height="158px" />
 						<div className="group-info">
-							{groups.map(group => {
-								return (
-									<div key={group.groupIdx} className="group-info__name">
-										<input type="radio" />
-										{group.groupName}
-									</div>
-								);
-							})}
+							<div className="group-info__box">
+								{groups.map(group => {
+									return (
+										<div key={group.groupIdx} className="group-info__name">
+											<input name="group" type="radio" />
+											<p>{group.groupName}</p>
+										</div>
+									);
+								})}
+							</div>
 						</div>
 						<div className="modal-buttons">
 							<button onClick={handleConfirm} className={`modal-buttons__confirm ${confirmClicked ? 'clicked' : null}`}>
