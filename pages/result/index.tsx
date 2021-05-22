@@ -16,6 +16,13 @@ const Styled = {
 			margin-bottom: 16px;
 		}
 	`,
+
+	DownloadImgBtn: styled.a`
+		padding: 8px 12px;
+		background-color: #ff8822;
+		margin-top: 32px;
+		display: inline-block;
+	`,
 };
 
 const resultData = {
@@ -47,9 +54,9 @@ function Result() {
 		<div>
 			<h1>당신의 기억을 정리해드렸어요</h1>
 			{memoryHtml}
-			<a href={memoryImage?.src} download={`${resultData.name}-${resultData.date}의 기억.png`}>
+			<Styled.DownloadImgBtn href={memoryImage?.src} download={`${resultData.name}-${resultData.date}의 기억.png`}>
 				이미지 다운로드
-			</a>
+			</Styled.DownloadImgBtn>
 		</div>
 	);
 }
