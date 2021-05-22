@@ -106,18 +106,9 @@ const handleClick = async () => {
 	};
  ```
 
-## Package.json
+## 사용한 모듈
 ```
-{
-  "name": "3second-goldfish-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
+
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.1",
@@ -126,8 +117,7 @@ const handleClick = async () => {
     "react-dom": "17.0.2",
     "recoil": "^0.3.1",
     "styled-components": "^5.3.0"
-  },
-  "devDependencies": {
+  
     "@types/react": "17.0.6",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -137,8 +127,7 @@ const handleClick = async () => {
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.3.0",
     "typescript": "4.2.4"
-  }
-}
+ 
 ```
 ## Code Convention
 * Git Branch
