@@ -2,27 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { SetterOrUpdater, useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
 
-import { allAnswerState } from '../../states';
+import { allAnswerState, questionNumState } from '../../states';
 
-const InputQuestion = () => {
+interface Props {
+	question: string;
+	random: string[];
+}
+const InputQuestion = ({ question, random }: Props) => {
 	const currentInputAnswer = useInput();
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
-
-	const submitAnswer = () => {
-		const newAns = [...allAnswer, currentInputAnswer.value];
-		setAllAnswer(newAns);
-	};
+	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		submitAnswer();
+		setAllAnswer([...allAnswer, currentInputAnswer.value]);
+		setQuestionNum(num => num + 1);
 		currentInputAnswer.setValue('');
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} />
-		</form>
+		<div>
+			<div>questionNum: {questionNum}</div>
+			<div>question: {question}</div>
+			<form onSubmit={handleSubmit}>
+				<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} />
+			</form>
+		</div>
 	);
 };
 

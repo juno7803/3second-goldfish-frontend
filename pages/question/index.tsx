@@ -8,8 +8,8 @@ import { allAnswerState, questionNumState } from '../../states';
 const Question = () => {
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const questionNum = useRecoilValue(questionNumState);
-
 	const currentQuestion = QUESTION_LIST[questionNum];
+	console.log(`allAnswer`, allAnswer);
 
 	return (
 		<>
