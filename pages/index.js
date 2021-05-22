@@ -84,6 +84,4 @@ function Main() {
 	);
 }
 
-function loading() {}
-
 export default Main;

@@ -54,6 +54,21 @@ const Circle = styled.div`
 	font-size: 96px;
 	font-weight: 500;
 `;
+
+const Input = styled.input`
+	width: 760px;
+	height: 56px;
+	margin: 0 16px;
+	background: #f9f9f9;
+	border-radius: 20px;
+	border: none;
+	padding: 32px;
+	font-size: 16px;
+	&:focus {
+		outline: none;
+	}
+`;
+
 interface Props {
 	question: string;
 	random: string[];
@@ -80,15 +95,15 @@ const InputQuestion = ({ question, random }: Props) => {
 		inputRef?.current?.focus();
 	});
 
-	React.useEffect(() => {
-		const questionTimer = setTimeout(() => {
-			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
-			setQuestionNum(num => num + 1);
-		}, 5500);
-		return () => {
-			clearTimeout(questionTimer);
-		};
-	}, [questionNum]);
+	// React.useEffect(() => {
+	// 	const questionTimer = setTimeout(() => {
+	// 		setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+	// 		setQuestionNum(num => num + 1);
+	// 	}, 5500);
+	// 	return () => {
+	// 		clearTimeout(questionTimer);
+	// 	};
+	// }, [questionNum]);
 
 	// React.useEffect(() => {
 	// 	const zeroToThree = () =>
@@ -145,7 +160,13 @@ const InputQuestion = ({ question, random }: Props) => {
 			</div>
 			<div className="button__wrapper">
 				<form onSubmit={handleSubmit}>
-					<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} ref={inputRef} />
+					<Input
+						type="text"
+						placeholder="입력 내용..."
+						value={currentInputAnswer.value}
+						onChange={currentInputAnswer.handler}
+						ref={inputRef}
+					/>
 				</form>
 			</div>
 			<Circle>{counter}</Circle>
