@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { allAnswerState, questionNumState } from '../../states';
+import { useRouter } from 'next/router';
 
 const WhoMeetQuestionWrapper = styled.div`
 	display: flex;
@@ -78,10 +79,13 @@ interface Props {
 const WhoMeetQuestion = ({ question, random }: Props) => {
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
+	const [counter, setCounter] = useState(3);
+	const router = useRouter();
 
 	const handleClick = () => {};
 
 	const passNextQuestion = () => {
+		setCounter(3);
 		setQuestionNum(num => num + 1);
 		setAllAnswer([...allAnswer, { [questionNum]: null }]);
 	};
@@ -95,6 +99,49 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 			clearTimeout(questionTimer);
 		};
 	}, [questionNum]);
+
+	// React.useEffect(() => {
+	// 	const zeroToThree = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(3);
+	// 			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+
+	// 			if (questionNum === 6) router.replace('/result');
+	// 			if (questionNum !== 6) setQuestionNum(num => num + 1);
+	// 		}, 1000);
+
+	// 	const oneToZero = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			zeroToThree();
+	// 		}, 1000);
+
+	// 	const twoToOne = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			oneToZero();
+	// 		}, 1000);
+
+	// 	const threeToTwo = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			twoToOne();
+	// 			console.log('2to1');
+	// 		}, 1000);
+
+	// 	const countStarter = setTimeout(() => {
+	// 		threeToTwo();
+	// 		console.log('3to2');
+	// 	}, 1000);
+
+	// 	return () => {
+	// 		clearTimeout(countStarter);
+	// 		clearTimeout(threeToTwo());
+	// 		clearTimeout(twoToOne());
+	// 		clearTimeout(oneToZero());
+	// 		clearTimeout(zeroToThree());
+	// 	};
+	// }, [questionNum]);
 
 	return (
 		<WhoMeetQuestionWrapper>
@@ -110,7 +157,7 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 				<Button onClick={handleClick}>응</Button>
 				<Button onClick={passNextQuestion}>아니</Button>
 			</div>
-			<Circle>3</Circle>
+			<Circle>{counter}</Circle>
 		</WhoMeetQuestionWrapper>
 	);
 };

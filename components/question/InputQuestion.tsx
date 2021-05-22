@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
 import { useRouter } from 'next/router';
@@ -62,6 +62,7 @@ interface Props {
 const InputQuestion = ({ question, random }: Props) => {
 	const router = useRouter();
 	const currentInputAnswer = useInput();
+	const [counter, setCounter] = useState(3);
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
 	const inputRef = React.useRef<HTMLInputElement>(null);
@@ -69,6 +70,7 @@ const InputQuestion = ({ question, random }: Props) => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		setAllAnswer([...allAnswer, { [questionNum]: currentInputAnswer.value }]);
+		setCounter(3);
 		currentInputAnswer.setValue('');
 		if (questionNum === 6) router.replace('/result');
 		if (questionNum !== 6) setQuestionNum(num => num + 1);
@@ -88,6 +90,49 @@ const InputQuestion = ({ question, random }: Props) => {
 		};
 	}, [questionNum]);
 
+	// React.useEffect(() => {
+	// 	const zeroToThree = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(3);
+	// 			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+
+	// 			if (questionNum === 6) router.replace('/result');
+	// 			if (questionNum !== 6) setQuestionNum(num => num + 1);
+	// 		}, 1000);
+
+	// 	const oneToZero = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			zeroToThree();
+	// 		}, 1000);
+
+	// 	const twoToOne = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			oneToZero();
+	// 		}, 1000);
+
+	// 	const threeToTwo = () =>
+	// 		setTimeout(() => {
+	// 			setCounter(counter => counter - 1);
+	// 			twoToOne();
+	// 			console.log('2to1');
+	// 		}, 1000);
+
+	// 	const countStarter = setTimeout(() => {
+	// 		threeToTwo();
+	// 		console.log('3to2');
+	// 	}, 1000);
+
+	// 	return () => {
+	// 		clearTimeout(countStarter);
+	// 		clearTimeout(threeToTwo());
+	// 		clearTimeout(twoToOne());
+	// 		clearTimeout(oneToZero());
+	// 		clearTimeout(zeroToThree());
+	// 	};
+	// }, [questionNum]);
+
 	return (
 		<WhoMeetQuestionWrapper>
 			<div className="progress-bar"></div>
@@ -103,7 +148,7 @@ const InputQuestion = ({ question, random }: Props) => {
 					<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} ref={inputRef} />
 				</form>
 			</div>
-			<Circle>3</Circle>
+			<Circle>{counter}</Circle>
 		</WhoMeetQuestionWrapper>
 	);
 };
