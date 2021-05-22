@@ -79,6 +79,33 @@ src
  
 
 ```
+##서버 연결코드
+```
+import { client } from './';
+
+export const postQuestions = async body => {
+	try {
+		const { data } = await client.post('/question', body);
+	} catch (err) {
+		throw err;
+	}
+};
+
+export const postGroup = async body => {
+	try {
+		const { data } = await client.post('/group', body);
+	} catch (err) {
+		throw err;
+	}
+};
+```
+
+```
+const handleClick = async () => {
+		await postQuestions({ postText: allAnswer });
+	};
+ ```
+
 
 ## Code Convention
 * Git Branch
@@ -91,3 +118,6 @@ src
 [chore] 간단한 수정
 [docs] 문서
 ```
+
+## 🌼프로젝트 배포 링크
+https://3second-goldfish.vercel.app/
