@@ -141,9 +141,7 @@ function Result() {
 					{allAnswer[2] && allAnswer[2] === null ? (
 						<div>{`아무도 안 만났고, 지금은 ${allAnswer[5]}에 있어.`}</div>
 					) : (
-						<div>
-							{allAnswer[2] && allAnswer[5] && `오늘은 ${allAnswer[2]}을/를 만났고, 지금은 ${allAnswer[5]}에 있어.`}
-						</div>
+						<div>{allAnswer[5] && `오늘은 ${allAnswer[2]}을/를 만났고, 지금은 ${allAnswer[5]}에 있어.`}</div>
 					)}
 					<div>{allAnswer[6] && `오늘 하루도 ${allAnswer[6]}.`}</div>
 				</div>
