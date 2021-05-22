@@ -3,6 +3,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { convertHtmlToPng } from '../../lib/utils/convertHtmlToPng';
 import { allAnswerState } from '../../states';
+import Modal from '../../components/Modal';
 
 const Styled = {
 	ImageWrapper: styled.div`
@@ -82,6 +83,7 @@ const Styled = {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			cursor: pointer;
 		}
 	`,
 
@@ -94,6 +96,7 @@ const Styled = {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		cursor: pointer;
 	`,
 };
 
@@ -106,6 +109,11 @@ function Result() {
 	const [memoryImage, setMemoryImage] = React.useState<any>(undefined);
 	const memoryImageRef = React.useRef<HTMLElement>(null);
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
+	const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+
+	const handleShareClick = () => {
+		setIsModalOpen(true);
+	};
 
 	React.useEffect(() => {
 		(async () => {
@@ -139,11 +147,14 @@ function Result() {
 			<div className="title">오늘의 너는 이랬붕어!</div>
 			{memoryHtml}
 			<Styled.Buttons>
-				<div className="share-button">그룹에 공유</div>
+				<div onClick={handleShareClick} className="share-button">
+					그룹에 공유
+				</div>
 				<Styled.DownloadImgBtn href={memoryImage?.src} download={`${resultData.name}-${resultData.date}의 기억.png`}>
 					이미지 저장
 				</Styled.DownloadImgBtn>
 			</Styled.Buttons>
+			<Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 		</Styled.MainWrapper>
 	);
 }
