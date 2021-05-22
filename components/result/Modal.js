@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useState } from 'react';
+import AddNewGroup from './AddNewGroup';
+import { postQuestions } from '../../lib/api/post';
+import { useRecoilValue } from 'recoil';
+import { allAnswerState } from '../../states';
 
 const ModalWrapper = styled.div`
 	.modal-overlay {
@@ -145,8 +149,15 @@ const groups = [
 
 const Modal = ({ isModalOpen, setIsModalOpen }) => {
 	const [confirmClicked, setConfirmClicked] = useState(false);
+	const [subModalOpen, setSubModalOpen] = useState(false);
+	const allAnswer = useRecoilValue(allAnswerState);
+
+	const handleClick = async () => {
+		await postQuestions({ postText: allAnswer });
+	};
 
 	const handleConfirm = () => {
+		handleClick();
 		setConfirmClicked(true);
 	};
 
@@ -156,37 +167,50 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
 
 	if (!isModalOpen) return null;
 	return (
-		<ModalWrapper>
-			<div className="modal-overlay">
-				<div className="modal">
-					<div className="modal-form">
-						<div className="modal-form__title">그룹에 공유</div>
-						<Image src="/assets/images/ModalFish.svg" alt="" width="158px" height="158px" />
-						<div className="group-info">
-							<div className="group-info__box">
-								{groups.map(group => {
-									return (
-										<label key={group.groupIdx} value="value" className="group-info__name">
-											<input name="group" type="radio" />
-											<span>{group.groupName}</span>
-										</label>
-									);
-								})}
+		<>
+			<ModalWrapper>
+				<div className="modal-overlay">
+					<div className="modal">
+						<div className="modal-form">
+							<div className="modal-form__title">그룹에 공유</div>
+							<Image src="/assets/images/ModalFish.svg" alt="" width="158px" height="158px" />
+							<div className="group-info">
+								<div className="group-info__box">
+									{groups.map(group => {
+										return (
+											<label key={group.groupIdx} value="value" className="group-info__name">
+												<input name="group" type="radio" />
+												<span>{group.groupName}</span>
+											</label>
+										);
+									})}
+								</div>
+							</div>
+							<div className="modal-buttons">
+								<button
+									onClick={handleConfirm}
+									className={`modal-buttons__confirm ${confirmClicked ? 'clicked' : null}`}
+								>
+									확인
+								</button>
+								<button onClick={handleCancel} className="modal-buttons__cancel">
+									취소
+								</button>
+							</div>
+							<div
+								className="modal-add-btn"
+								onClick={() => {
+									setSubModalOpen(true);
+								}}
+							>
+								+ 새 그룹 추가하기
 							</div>
 						</div>
-						<div className="modal-buttons">
-							<button onClick={handleConfirm} className={`modal-buttons__confirm ${confirmClicked ? 'clicked' : null}`}>
-								확인
-							</button>
-							<button onClick={handleCancel} className="modal-buttons__cancel">
-								취소
-							</button>
-						</div>
-						<div className="modal-add-btn">+ 새 그룹 추가하기</div>
 					</div>
 				</div>
-			</div>
-		</ModalWrapper>
+			</ModalWrapper>
+			{subModalOpen && <AddNewGroup subModalOpen={subModalOpen} setSubModalOpen={setSubModalOpen} />}
+		</>
 	);
 };
 
