@@ -3,8 +3,8 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { convertHtmlToPng } from '../../lib/utils/convertHtmlToPng';
 import { allAnswerState } from '../../states';
-import Modal from '../../components/Modal';
 import { Router, useRouter } from 'next/router';
+import Modal from '../../components/result/Modal';
 
 const Styled = {
 	ImageWrapper: styled.div`
