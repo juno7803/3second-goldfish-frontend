@@ -38,6 +38,48 @@ Project Period : 2021.05.22 ~ 2021.05.23
 [4] 결과 이미지를 저장하거나 그룹에 공유할 수 있으며 새로운 그룹도 생성 가능하다.
 [5] 해당 그룹에 들어가면 공유한 그리드를 확인할 수 있다.
 ```
+
+##프로젝트 구조
+```
+public
+ ┣ images
+ ┃ ┣ MainLogo.png
+ ┃ ┣ ...
+ ┃ ┗ img_speechbubble.svg
+ ┗ favicon.ico
+src
+ ┣ pages
+ ┃ ┣ question
+ ┃ ┃ ┣ index.tsx
+ ┃ ┣ AddNewGroup.js
+ ┃ ┣ _app.tsx
+ ┃ ┗ result
+ ┃ ┃ ┣ index.tsx
+ ┃ ┣ index.js
+ ┃ ┃ 
+ ┣ components
+ ┃ ┣ question
+ ┃ ┃ ┃ WhoMeetQuestion.tsx
+ ┃ ┃ ┗ InputQuestion.tsx
+ ┃ ┗ Modal.jsx
+ ┣ lib
+ ┃ ┣ constants
+ ┃ ┃ ┗ questionList.ts
+ ┃ ┗ hooks
+ ┃ ┃ ┗ iseInput.ts
+ ┣ utils
+ ┃ ┗ convertHtmlToPng.ts
+ ┃  
+ ┣ states
+ ┗ index.ts 
+ styles
+ ┗ globals.css
+ types
+ ┗ index.ts
+ 
+
+```
+
 ## Code Convention
 * Git Branch
 기능별로 branch 구성
