@@ -95,58 +95,21 @@ const InputQuestion = ({ question, random }: Props) => {
 		inputRef?.current?.focus();
 	});
 
-	// React.useEffect(() => {
-	// 	const questionTimer = setTimeout(() => {
-	// 		setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
-	// 		setQuestionNum(num => num + 1);
-	// 	}, 5500);
-	// 	return () => {
-	// 		clearTimeout(questionTimer);
-	// 	};
-	// }, [questionNum]);
-
-	// React.useEffect(() => {
-	// 	const zeroToThree = () =>
-	// 		setTimeout(() => {
-	// 			setCounter(3);
-	// 			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
-
-	// 			if (questionNum === 6) router.replace('/result');
-	// 			if (questionNum !== 6) setQuestionNum(num => num + 1);
-	// 		}, 1000);
-
-	// 	const oneToZero = () =>
-	// 		setTimeout(() => {
-	// 			setCounter(counter => counter - 1);
-	// 			zeroToThree();
-	// 		}, 1000);
-
-	// 	const twoToOne = () =>
-	// 		setTimeout(() => {
-	// 			setCounter(counter => counter - 1);
-	// 			oneToZero();
-	// 		}, 1000);
-
-	// 	const threeToTwo = () =>
-	// 		setTimeout(() => {
-	// 			setCounter(counter => counter - 1);
-	// 			twoToOne();
-	// 			console.log('2to1');
-	// 		}, 1000);
-
-	// 	const countStarter = setTimeout(() => {
-	// 		threeToTwo();
-	// 		console.log('3to2');
-	// 	}, 1000);
-
-	// 	return () => {
-	// 		clearTimeout(countStarter);
-	// 		clearTimeout(threeToTwo());
-	// 		clearTimeout(twoToOne());
-	// 		clearTimeout(oneToZero());
-	// 		clearTimeout(zeroToThree());
-	// 	};
-	// }, [questionNum]);
+	React.useEffect(() => {
+		if (counter >= 0) {
+			const timer = setTimeout(() => setCounter(s => s - 1), 2000);
+			return () => {
+				clearTimeout(timer);
+			};
+		} else {
+			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+			if (questionNum === 6) router.replace('/result');
+			if (questionNum !== 6) {
+				setQuestionNum(num => num + 1);
+				setCounter(3);
+			}
+		}
+	}, [counter]);
 
 	return (
 		<WhoMeetQuestionWrapper>
