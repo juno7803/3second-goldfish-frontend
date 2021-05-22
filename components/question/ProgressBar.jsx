@@ -8,17 +8,20 @@ const Root = styled.div`
 	width: 610px;
 	height: 6px;
 	background-color: black;
-	border-radius: 50px;
+	border-radius: 6px;
 	display: flex;
+`;
 
-	&:nth-of-type(1) {
-		background: #ffaf02;
-		height: 6px;
-	}
-	&:nth-of-type(2) {
-		background: #ffffff;
-		height: 6px;
-	}
+const Right = styled.div`
+	background: #ffaf02;
+	height: 100%;
+	flex: ${({ width }) => width};
+`;
+
+const Left = styled.div`
+	background: #ffffff;
+	height: 100%;
+	flex: ${({ width }) => width};
 `;
 
 function ProgressBar() {
@@ -26,8 +29,8 @@ function ProgressBar() {
 
 	return (
 		<Root>
-			<div />
-			<div />
+			<Right width={questionNum} />
+			<Left width={7 - questionNum} />
 		</Root>
 	);
 }

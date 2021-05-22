@@ -118,15 +118,19 @@ function Result() {
 			<div className="result-content">
 				<div className="result-content__date">2021년 5월 23일</div>
 				<div className="result-content__detail">
-					<div>{`오늘 날씨는 ${allAnswer[1][1]}같아.`}</div>
-					<div>{`나 ${allAnswer[0][0]}는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~`}</div>
-					<div>{`나의 굶주린 배를 채워준 것은 ${allAnswer[4][4]}! 이런 게 인생이지, 하하.`}</div>
-					{allAnswer[2][2] === null ? (
+					<div>{allAnswer[1] && `오늘 날씨는 ${allAnswer[1][1]}같아.`}</div>
+					<div>{allAnswer[0] && `나 ${allAnswer[0][0]}는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~`}</div>
+					<div>{allAnswer[4] && `나의 굶주린 배를 채워준 것은 ${allAnswer[4][4]}! 이런 게 인생이지, 하하.`}</div>
+					{allAnswer[2] && allAnswer[2][2] === null ? (
 						<div>{`아무도 안 만났고, 지금은 ${allAnswer[5][5]}에 있어.`}</div>
 					) : (
-						<div>{`오늘은 ${allAnswer[2][2]}을/를 만났고, 지금은 ${allAnswer[5][5]}에 있어.`}</div>
+						<div>
+							{allAnswer[2] &&
+								allAnswer[5] &&
+								`오늘은 ${allAnswer[2][2]}을/를 만났고, 지금은 ${allAnswer[5][5]}에 있어.`}
+						</div>
 					)}
-					<div>{`오늘 하루도 ${allAnswer[6][6]}.`}</div>
+					<div>{allAnswer[6] && `오늘 하루도 ${allAnswer[6][6]}.`}</div>
 				</div>
 			</div>
 			<img src="/assets/images/SmallFish.svg" alt="" />
@@ -136,7 +140,7 @@ function Result() {
 	return (
 		<Styled.MainWrapper>
 			<div className="title">오늘의 너는 이랬붕어!</div>
-			{memoryHtml}
+			{allAnswer && memoryHtml}
 			<Styled.Buttons>
 				<div className="share-button">그룹에 공유</div>
 				<Styled.DownloadImgBtn href={memoryImage?.src} download={`${resultData.name}-${resultData.date}의 기억.png`}>

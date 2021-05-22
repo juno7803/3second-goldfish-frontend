@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
 import { useRouter } from 'next/router';
-import { Progress } from 'antd';
 
 import { allAnswerState, questionNumState } from '../../states';
 import ProgressBar from './ProgressBar';
@@ -110,7 +109,7 @@ const InputQuestion = ({ question, random }: Props) => {
 
 	return (
 		<WhoMeetQuestionWrapper>
-			<Progress percent={50} showInfo={false} />
+			<ProgressBar />
 
 			<div className="question__content">
 				<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
