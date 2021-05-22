@@ -115,9 +115,6 @@ function Result() {
 		setIsModalOpen(true);
 	};
 
-	const [memoryImage, setMemoryImage] = React.useState(undefined);
-	const memoryImageRef = React.useRef(null);
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 	React.useEffect(() => {
 		(async () => {
 			const image = await convertHtmlToPng(memoryImageRef);
