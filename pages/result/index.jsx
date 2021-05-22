@@ -103,10 +103,9 @@ const resultData = {
 };
 
 function Result() {
-	const [memoryImage, setMemoryImage] = React.useState<any>(undefined);
-	const memoryImageRef = React.useRef<HTMLElement>(null);
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
-
+	const [memoryImage, setMemoryImage] = React.useState(undefined);
+	const memoryImageRef = React.useRef(null);
+	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 	React.useEffect(() => {
 		(async () => {
 			const image = await convertHtmlToPng(memoryImageRef);
@@ -115,7 +114,7 @@ function Result() {
 	}, []);
 
 	const memoryHtml = (
-		<Styled.ImageWrapper ref={memoryImageRef as React.LegacyRef<HTMLDivElement> | undefined}>
+		<Styled.ImageWrapper ref={memoryImageRef}>
 			<div className="result-content">
 				<div className="result-content__date">2021년 5월 23일</div>
 				<div className="result-content__detail">

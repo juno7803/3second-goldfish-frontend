@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
 import { useRouter } from 'next/router';
+import { Progress } from 'antd';
 
 import { allAnswerState, questionNumState } from '../../states';
+import ProgressBar from './ProgressBar';
 
 const WhoMeetQuestionWrapper = styled.div`
 	display: flex;
@@ -12,12 +14,7 @@ const WhoMeetQuestionWrapper = styled.div`
 	align-items: center;
 	width: 100vw;
 	height: 100vh;
-	.progress-bar {
-		margin-top: 112px;
-		width: 610px;
-		height: 6px;
-		background-color: black;
-	}
+
 	.question {
 		&__content {
 			margin-top: 61px;
@@ -113,7 +110,8 @@ const InputQuestion = ({ question, random }: Props) => {
 
 	return (
 		<WhoMeetQuestionWrapper>
-			<div className="progress-bar"></div>
+			<Progress percent={50} showInfo={false} />
+
 			<div className="question__content">
 				<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
 				<div className="question__content--bubble">
