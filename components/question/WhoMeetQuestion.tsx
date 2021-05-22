@@ -3,41 +3,6 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { allAnswerState, questionNumState } from '../../states';
 
-interface Props {
-	question: string;
-	random: string[];
-}
-
-const WhoMeetQuestion = ({ question, random }: Props) => {
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
-	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
-
-	const handleClick = () => {};
-
-	const passNextQuestion = () => {
-		setQuestionNum(num => num + 1);
-		setAllAnswer([...allAnswer, { [questionNum]: null }]);
-	};
-
-	return (
-		<WhoMeetQuestionWrapper>
-			<div className="progress-bar"></div>
-			<div className="question__content">
-				<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
-				<img src="/assets/images/img_speechbubble.svg" />
-				<div className="question__content--desc">{question}</div>
-			</div>
-			<div className="button__wrapper">
-				<Button onClick={handleClick}>응</Button>
-				<Button onClick={passNextQuestion}>아니</Button>
-			</div>
-			<Circle>3</Circle>
-		</WhoMeetQuestionWrapper>
-	);
-};
-
-export default WhoMeetQuestion;
-
 const WhoMeetQuestionWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -60,7 +25,8 @@ const WhoMeetQuestionWrapper = styled.div`
 			}
 			&--desc {
 				position: absolute;
-				left: 920px;
+				top: 42px;
+				left: 140px;
 				font-weight: 500;
 				font-size: 24px;
 				line-height: 34.75px;
@@ -104,3 +70,39 @@ const Circle = styled.div`
 	font-size: 96px;
 	font-weight: 500;
 `;
+interface Props {
+	question: string;
+	random: string[];
+}
+
+const WhoMeetQuestion = ({ question, random }: Props) => {
+	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
+	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
+
+	const handleClick = () => {};
+
+	const passNextQuestion = () => {
+		setQuestionNum(num => num + 1);
+		setAllAnswer([...allAnswer, { [questionNum]: null }]);
+	};
+
+	return (
+		<WhoMeetQuestionWrapper>
+			<div className="progress-bar"></div>
+			<div className="question__content">
+				<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
+				<div className="question__content--bubble">
+					<img src="/assets/images/img_speechbubble.svg" />
+					<div className="question__content--desc">{question}</div>
+				</div>
+			</div>
+			<div className="button__wrapper">
+				<Button onClick={handleClick}>응</Button>
+				<Button onClick={passNextQuestion}>아니</Button>
+			</div>
+			<Circle>3</Circle>
+		</WhoMeetQuestionWrapper>
+	);
+};
+
+export default WhoMeetQuestion;
