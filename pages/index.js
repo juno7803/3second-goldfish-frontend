@@ -1,12 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { useRecoilState } from 'recoil';
+import { allAnswerState } from '../states';
 
 const MainWrap = styled.div`
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	background: #f1f7ff;
+
+	.header {
+		z-index: 999;
+	}
 
 	.container {
 		margin-top: 60px;
@@ -62,6 +70,38 @@ const MainWrap = styled.div`
 	}
 `;
 
+const HomeBigBackground = styled.img`
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 400px;
+	@media (max-width: 1440px) {
+		width: 800px;
+	}
+	@media (max-width: 1140px) {
+		width: 640px;
+	}
+	@media (max-width: 768px) {
+		display: none;
+	}
+`;
+
+const HomeSmallBackground = styled.img`
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 880px;
+	@media (max-width: 1440px) {
+		width: 800px;
+	}
+	@media (max-width: 1140px) {
+		width: 640px;
+	}
+	@media (max-width: 768px) {
+		display: none;
+	}
+`;
+
 function Main() {
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 
@@ -82,6 +122,8 @@ function Main() {
 					</Link>
 				</section>
 			</div>
+			<HomeSmallBackground src="/assets/images/bg_sm_circle.svg" />
+			<HomeBigBackground src="/assets/images/bg_big_circle.svg" />
 		</MainWrap>
 	);
 }
