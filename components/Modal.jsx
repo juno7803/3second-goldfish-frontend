@@ -54,14 +54,17 @@ const ModalWrapper = styled.div`
 		justify-content: center;
 		overflow-y: scroll;
 		color: #000000;
+		font-family: 'Noto Sans KR', sans-serif;
+		font-weight: 400;
 
 		&__box {
 			display: flex;
 			flex-direction: column;
-			margin-top: 70px;
 		}
 
 		&__name {
+			display: flex;
+			align-items: center;
 			margin-bottom: 16px;
 			font-size: 18px;
 		}
@@ -108,28 +111,35 @@ const ModalWrapper = styled.div`
 		margin-top: 16px;
 		cursor: pointer;
 	}
+
+	label > input[type='radio'] + *::before {
+		content: '';
+		display: inline-block;
+		vertical-align: center;
+		width: 0.9rem;
+		height: 0.9rem;
+		margin-right: 8px;
+		border-radius: 50%;
+		border: 1.2px solid #767676;
+	}
+
+	label > input[type='radio'] {
+		display: none;
+	}
+
+	label > input[type='radio']:checked + *::before {
+		background: #ffaf02;
+		border-color: #767676;
+	}
+	label > input[type='radio']:checked + * {
+		border-color: #ffaf02;
+	}
 `;
 
 const groups = [
 	{
 		groupIdx: 1,
 		groupName: 'SOPT',
-	},
-	{
-		groupIdx: 2,
-		groupName: '솝커톤 9조',
-	},
-	{
-		groupIdx: 3,
-		groupName: '궁금궁금',
-	},
-	{
-		groupIdx: 4,
-		groupName: '솝트',
-	},
-	{
-		groupIdx: 5,
-		groupName: '솝트 5',
 	},
 ];
 
@@ -156,10 +166,10 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
 							<div className="group-info__box">
 								{groups.map(group => {
 									return (
-										<div key={group.groupIdx} className="group-info__name">
+										<label key={group.groupIdx} value="value" className="group-info__name">
 											<input name="group" type="radio" />
-											<p>{group.groupName}</p>
-										</div>
+											<span>{group.groupName}</span>
+										</label>
 									);
 								})}
 							</div>
