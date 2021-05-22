@@ -93,7 +93,7 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 	const passNextQuestion = () => {
 		setCounter(3);
 		setQuestionNum(num => num + 1);
-		setAllAnswer([...allAnswer, { [questionNum]: null }]);
+		setAllAnswer({ ...allAnswer, [questionNum]: null });
 	};
 
 	React.useEffect(() => {
@@ -103,7 +103,7 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 				clearTimeout(timer);
 			};
 		} else {
-			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+			setAllAnswer({ ...allAnswer, [questionNum]: random[Math.floor(Math.random() * random.length)] });
 			if (questionNum === 6) router.replace('/result');
 			if (questionNum !== 6) {
 				setQuestionNum(num => num + 1);

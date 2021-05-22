@@ -118,7 +118,7 @@ function Main() {
 						</div>
 						<div className="main__title--sub2">내용 추가 예정!</div>
 					</div>
-					<Link href="/question" onClick={() => setAllAnswer([])}>
+					<Link href="/question" onClick={() => setAllAnswer({})}>
 						<a className="game__start">시작하기</a>
 					</Link>
 				</section>

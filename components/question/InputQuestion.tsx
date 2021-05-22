@@ -80,7 +80,7 @@ const InputQuestion = ({ question, random }: Props) => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setAllAnswer([...allAnswer, { [questionNum]: currentInputAnswer.value }]);
+		setAllAnswer({ ...allAnswer, [questionNum]: currentInputAnswer.value });
 		setCounter(3);
 		currentInputAnswer.setValue('');
 		if (questionNum === 6) router.replace('/result');
@@ -98,7 +98,7 @@ const InputQuestion = ({ question, random }: Props) => {
 				clearTimeout(timer);
 			};
 		} else {
-			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+			setAllAnswer({ ...allAnswer, [questionNum]: random[Math.floor(Math.random() * random.length)] });
 			if (questionNum === 6) router.replace('/result');
 			if (questionNum !== 6) {
 				setQuestionNum(num => num + 1);
