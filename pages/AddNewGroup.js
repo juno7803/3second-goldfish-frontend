@@ -120,6 +120,7 @@ const ModalWrapper = styled.div`
             
    }
    .form-control{
+      padding-left:21px;
       width:322px;
       height:45px;
       background: #FFFFFF;
@@ -130,6 +131,12 @@ const ModalWrapper = styled.div`
 
    }
    .form-control-detail{
+      font-family: inherit;
+      font-size : inherit;
+      font-weight: lighter;
+      padding-left:21px;
+      padding-top:18px;
+      resize:none;
       margin-top:10px;
       width:322px;
       height:102px;
@@ -142,7 +149,7 @@ const ModalWrapper = styled.div`
 `;
 
 
-const AddNewGroup = ({isModalOpen, setIsModalOpen}) => {
+const AddNewGroup = () => {
    const handleConfirm = e => {
       e.preventDefault();
    };
@@ -151,7 +158,6 @@ const AddNewGroup = ({isModalOpen, setIsModalOpen}) => {
       e.preventDefault();
    };
 
-   if(!isModalOpen) return null;
    return (
       <ModalWrapper>
          <div className="modal-overlay">
@@ -163,7 +169,7 @@ const AddNewGroup = ({isModalOpen, setIsModalOpen}) => {
 									<input type="text" class="form-control" placeholder="그룹명을 입력하세요." />
 						</div>
                   <div class="group-detail-form">그룹 설명<br/>
-									<input type="text" class="form-control-detail" rows="3" placeholder="그룹 설명을 입력하세요." />
+									<textarea class="form-control-detail"  placeholder="그룹 설명을 입력하세요." />
 						</div>
                   <div className="modal-buttons">
                      <button onClick={handleConfirm} className="modal-buttons__confirm">
