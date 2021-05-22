@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { allAnswerState, questionNumState } from '../../states';
 import { useRouter } from 'next/router';
+import InputQuestion from './InputQuestion';
 
 const WhoMeetQuestionWrapper = styled.div`
 	display: flex;
@@ -71,18 +72,27 @@ const Circle = styled.div`
 	font-size: 96px;
 	font-weight: 500;
 `;
+
+const data = {
+	question: '누구를 만났어?',
+	random: ['남궁선규', '권상호', '9붕어', '신기한 사람', '감사한 인연'],
+};
+
 interface Props {
 	question: string;
 	random: string[];
 }
 
 const WhoMeetQuestion = ({ question, random }: Props) => {
+	const [show, setShow] = useState(false);
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
 	const [counter, setCounter] = useState(3);
 	const router = useRouter();
 
-	const handleClick = () => {};
+	const handleClick = () => {
+		setShow(true);
+	};
 
 	const passNextQuestion = () => {
 		setCounter(3);
@@ -107,21 +117,24 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 	}, [counter]);
 
 	return (
-		<WhoMeetQuestionWrapper>
-			<div className="progress-bar"></div>
-			<div className="question__content">
-				<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
-				<div className="question__content--bubble">
-					<img src="/assets/images/img_speechbubble.svg" />
-					<div className="question__content--desc">{question}</div>
+		<>
+			<WhoMeetQuestionWrapper>
+				<div className="progress-bar"></div>
+				<div className="question__content">
+					<img className="question__content--fish" src="/assets/images/img_fish_big.svg" />
+					<div className="question__content--bubble">
+						<img src="/assets/images/img_speechbubble.svg" />
+						<div className="question__content--desc">{question}</div>
+					</div>
 				</div>
-			</div>
-			<div className="button__wrapper">
-				<Button onClick={handleClick}>응</Button>
-				<Button onClick={passNextQuestion}>아니</Button>
-			</div>
-			<Circle>{counter}</Circle>
-		</WhoMeetQuestionWrapper>
+				<div className="button__wrapper">
+					<Button onClick={handleClick}>응</Button>
+					<Button onClick={passNextQuestion}>아니</Button>
+				</div>
+				<Circle>{counter}</Circle>
+			</WhoMeetQuestionWrapper>
+			{show && <InputQuestion question={data.question} random={data.random} />}
+		</>
 	);
 };
 
