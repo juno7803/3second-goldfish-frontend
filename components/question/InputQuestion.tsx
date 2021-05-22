@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SetterOrUpdater, useRecoilState } from 'recoil';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
 
 import { allAnswerState, questionNumState } from '../../states';
@@ -15,7 +15,7 @@ const InputQuestion = ({ question, random }: Props) => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setAllAnswer([...allAnswer, currentInputAnswer.value]);
+		setAllAnswer([...allAnswer, { [questionNum]: currentInputAnswer.value }]);
 		setQuestionNum(num => num + 1);
 		currentInputAnswer.setValue('');
 	};
