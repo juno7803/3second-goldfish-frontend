@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { postGroup } from '../../lib/api/post';
-import useInput from '../../hooks/useInput';
 
 const ModalWrapper = styled.div`
 	.modal-overlay {
@@ -146,10 +145,13 @@ const ModalWrapper = styled.div`
 `;
 
 const AddNewGroup = ({ subModalOpen, setSubModalOpen }) => {
-	const groupInput = useInput();
+	const [value, setValue] = useState('');
+	const handleChange = e => {
+		setValue(e.target.value);
+	};
 
 	const handleConfirm = async () => {
-		await postGroup({ groupName: groupInput.value });
+		await postGroup({ groupName: value });
 	};
 
 	const handleCancel = e => {
@@ -171,8 +173,8 @@ const AddNewGroup = ({ subModalOpen, setSubModalOpen }) => {
 							<input
 								type="text"
 								class="form-control"
-								value={groupInput.value}
-								onChange={groupInput.handler}
+								value={value}
+								onChange={handleChange}
 								placeholder="그룹명을 입력하세요."
 							/>
 						</div>
