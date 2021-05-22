@@ -14,6 +14,7 @@ const MainWrap = styled.div`
 
 	.header {
 		z-index: 999;
+		margin-bottom: 280px;
 	}
 
 	.container {
