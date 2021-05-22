@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import { convertHtmlToPng } from '../../lib/utils/convertHtmlToPng';
-import Image from 'next/image';
+import { allAnswerState } from '../../states';
 
 const Styled = {
 	ImageWrapper: styled.div`
@@ -104,6 +105,7 @@ const resultData = {
 function Result() {
 	const [memoryImage, setMemoryImage] = React.useState<any>(undefined);
 	const memoryImageRef = React.useRef<HTMLElement>(null);
+	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 
 	React.useEffect(() => {
 		(async () => {
@@ -117,11 +119,15 @@ function Result() {
 			<div className="result-content">
 				<div className="result-content__date">2021년 5월 23일</div>
 				<div className="result-content__detail">
-					<div>오늘 날씨는 내 미래 같아.</div>
-					<div>나 9붕어 는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~</div>
-					<div>나의 굶주린 배를 채워준 것은 킬바사소세지! 이런 게 인생이지, 하하.</div>
-					<div>오늘은 권상호 을/를 만났고, 지금은 여수 앞바다에 있어.</div>
-					<div>오늘 하루도 자알버텼다.</div>
+					<div>{`오늘 날씨는 ${allAnswer[1][1]}같아.`}</div>
+					<div>{`나 ${allAnswer[0][0]}는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~`}</div>
+					<div>{`나의 굶주린 배를 채워준 것은 ${allAnswer[4][4]}! 이런 게 인생이지, 하하.`}</div>
+					{allAnswer[2][2] === null ? (
+						<div>{`아무도 안 만났고, 지금은 ${allAnswer[5][5]}에 있어.`}</div>
+					) : (
+						<div>{`오늘은 ${allAnswer[2][2]}을/를 만났고, 지금은 ${allAnswer[5][5]}에 있어.`}</div>
+					)}
+					<div>{`오늘 하루도 ${allAnswer[6][6]}.`}</div>
 				</div>
 			</div>
 			<img src="/assets/images/SmallFish.svg" alt="" />
