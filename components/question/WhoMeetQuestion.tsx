@@ -25,7 +25,7 @@ const WhoMeetQuestionWrapper = styled.div`
 			}
 			&--desc {
 				position: absolute;
-				top: 42px;
+				top: 60px;
 				left: 140px;
 				font-weight: 500;
 				font-size: 24px;

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import useInput from '../../lib/hooks/useInput';
+import { useRouter } from 'next/router';
 
 import { allAnswerState, questionNumState } from '../../states';
 
@@ -27,8 +28,8 @@ const WhoMeetQuestionWrapper = styled.div`
 			}
 			&--desc {
 				position: absolute;
-				top: 42px;
-				left: 140px;
+				top: 54px;
+				left: 120px;
 				font-weight: 500;
 				font-size: 24px;
 				line-height: 34.75px;
@@ -77,6 +78,7 @@ interface Props {
 	random: string[];
 }
 const InputQuestion = ({ question, random }: Props) => {
+	const router = useRouter();
 	const currentInputAnswer = useInput();
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
@@ -84,8 +86,9 @@ const InputQuestion = ({ question, random }: Props) => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		setAllAnswer([...allAnswer, { [questionNum]: currentInputAnswer.value }]);
-		setQuestionNum(num => num + 1);
 		currentInputAnswer.setValue('');
+		if (questionNum === 6) router.replace('/result');
+		if (questionNum !== 6) setQuestionNum(num => num + 1);
 	};
 
 	return (
