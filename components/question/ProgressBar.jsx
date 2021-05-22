@@ -16,9 +16,11 @@ const Right = styled.div`
 	background: #ffaf02;
 	height: 100%;
 	flex: ${({ width }) => width};
+	transition: 0.2s;
 `;
 
 const Left = styled.div`
+	transition: 0.2s;
 	background: #ffffff;
 	height: 100%;
 	flex: ${({ width }) => width};

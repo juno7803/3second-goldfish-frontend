@@ -112,7 +112,11 @@ function Main() {
 				<section className="container">
 					<img src="/assets/images/MainLogo.png" alt="" width={200} height={200} />
 					<div className="main_titles">
-						<div className="main__title">오늘 뭐했붕어?</div>
+						{/* <div className="main__title">오늘 뭐했붕어?</div> */}
+						<img
+							style={{ marginTop: '24px', height: '60px', marginBottom: '48px' }}
+							src="/assets/images/main-title.svg"
+						/>
 						<div className="main__title--sub1">
 							삼...이...일....땡!!! 오늘 있었던 일 3초 안에 대답 못하면 기억 조작!
 						</div>

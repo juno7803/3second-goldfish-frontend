@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { convertHtmlToPng } from '../../lib/utils/convertHtmlToPng';
 import { allAnswerState } from '../../states';
 import Modal from '../../components/Modal';
+import { Router, useRouter } from 'next/router';
 
 const Styled = {
 	ImageWrapper: styled.div`
@@ -110,6 +111,7 @@ function Result() {
 	const memoryImageRef = React.useRef(null);
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
+	const router = useRouter();
 
 	const handleShareClick = () => {
 		setIsModalOpen(true);
@@ -122,12 +124,18 @@ function Result() {
 		})();
 	}, []);
 
+	React.useEffect(() => {
+		if (Object.keys(allAnswer).length === 0) {
+			() => router.push('/');
+		}
+	}, []);
+
 	const memoryHtml = (
 		<Styled.ImageWrapper ref={memoryImageRef}>
 			<div className="result-content">
 				<div className="result-content__date">2021년 5월 23일</div>
 				<div className="result-content__detail">
-					<div>{`오늘 날씨는 ${allAnswer[1]}같아.`}</div>
+					<div>{`오늘 날씨는 ${allAnswer[1]}.`}</div>
 					<div>{`나 ${allAnswer[0]}는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~`}</div>
 					<div>{allAnswer[4] && `나의 굶주린 배를 채워준 것은 ${allAnswer[4]}! 이런 게 인생이지, 하하.`}</div>
 					{allAnswer[2] && allAnswer[2] === null ? (
