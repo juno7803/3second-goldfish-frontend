@@ -25,8 +25,8 @@ const WhoMeetQuestionWrapper = styled.div`
 			}
 			&--desc {
 				position: absolute;
-				top: 60px;
-				left: 140px;
+				top: 54px;
+				left: 120px;
 				font-weight: 500;
 				font-size: 24px;
 				line-height: 34.75px;
@@ -85,6 +85,16 @@ const WhoMeetQuestion = ({ question, random }: Props) => {
 		setQuestionNum(num => num + 1);
 		setAllAnswer([...allAnswer, { [questionNum]: null }]);
 	};
+
+	React.useEffect(() => {
+		const questionTimer = setTimeout(() => {
+			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+			setQuestionNum(num => num + 1);
+		}, 5500);
+		return () => {
+			clearTimeout(questionTimer);
+		};
+	}, [questionNum]);
 
 	return (
 		<WhoMeetQuestionWrapper>

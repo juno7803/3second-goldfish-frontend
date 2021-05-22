@@ -42,25 +42,6 @@ const WhoMeetQuestionWrapper = styled.div`
 	}
 `;
 
-const Button = styled.div`
-	&:nth-of-type(2) {
-		margin-left: 35px;
-	}
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 187px;
-	height: 62px;
-	border-radius: 20px;
-	background-color: #efefef;
-	font-weight: 700;
-	font-size: 18px;
-	&:active {
-		box-shadow: inset 0px 4px 14px rgba(0, 0, 0, 0.1);
-	}
-`;
-
 const Circle = styled.div`
 	margin-top: 39px;
 	width: 142px;
@@ -77,11 +58,13 @@ interface Props {
 	question: string;
 	random: string[];
 }
+
 const InputQuestion = ({ question, random }: Props) => {
 	const router = useRouter();
 	const currentInputAnswer = useInput();
 	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
+	const inputRef = React.useRef<HTMLInputElement>(null);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -90,6 +73,20 @@ const InputQuestion = ({ question, random }: Props) => {
 		if (questionNum === 6) router.replace('/result');
 		if (questionNum !== 6) setQuestionNum(num => num + 1);
 	};
+
+	React.useEffect(() => {
+		inputRef?.current?.focus();
+	});
+
+	React.useEffect(() => {
+		const questionTimer = setTimeout(() => {
+			setAllAnswer([...allAnswer, { [questionNum]: random[Math.floor(Math.random() * random.length)] }]);
+			setQuestionNum(num => num + 1);
+		}, 5500);
+		return () => {
+			clearTimeout(questionTimer);
+		};
+	}, [questionNum]);
 
 	return (
 		<WhoMeetQuestionWrapper>
@@ -103,7 +100,7 @@ const InputQuestion = ({ question, random }: Props) => {
 			</div>
 			<div className="button__wrapper">
 				<form onSubmit={handleSubmit}>
-					<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} />
+					<input type="text" value={currentInputAnswer.value} onChange={currentInputAnswer.handler} ref={inputRef} />
 				</form>
 			</div>
 			<Circle>3</Circle>
