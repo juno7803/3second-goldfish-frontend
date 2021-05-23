@@ -152,8 +152,15 @@ const Modal = ({ isModalOpen, setIsModalOpen }) => {
 	const [subModalOpen, setSubModalOpen] = useState(false);
 	const allAnswer = useRecoilValue(allAnswerState);
 
+	let arrAnswer = [];
+	for (const [key, value] of Object.entries(allAnswer)) {
+		value ? arrAnswer.push(value) : 'null';
+	}
+	const strAnswer = arrAnswer?.join('|');
+	console.log(`strAnswer`, strAnswer);
+
 	const handleClick = async () => {
-		await postQuestions({ postText: allAnswer });
+		await postQuestions({ postText: strAnswer });
 	};
 
 	const handleConfirm = () => {
