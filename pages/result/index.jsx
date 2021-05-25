@@ -138,7 +138,7 @@ function Result() {
 					<div>{`오늘 날씨는 ${allAnswer[1]}.`}</div>
 					<div>{`나 ${allAnswer[0]}는/은 오늘 기분이 ${allAnswer[3]}. 말해 뭐해~`}</div>
 					<div>{allAnswer[4] && `나의 굶주린 배를 채워준 것은 ${allAnswer[4]}! 이런 게 인생이지, 하하.`}</div>
-					{allAnswer[2] && allAnswer[2] === null ? (
+					{allAnswer[2] == null ? (
 						<div>{`아무도 안 만났고, 지금은 ${allAnswer[5]}에 있어.`}</div>
 					) : (
 						<div>{allAnswer[5] && `오늘은 ${allAnswer[2]}을/를 만났고, 지금은 ${allAnswer[5]}에 있어.`}</div>
