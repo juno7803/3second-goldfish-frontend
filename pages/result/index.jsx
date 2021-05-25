@@ -136,7 +136,7 @@ function Result() {
 				<div className="result-content__date">2021년 5월 23일</div>
 				<div className="result-content__detail">
 					<div>{`오늘 날씨는 ${allAnswer[1]}.`}</div>
-					<div>{`나 ${allAnswer[0]}는/은 오늘 기분이 썩 유쾌하진 않아. 말해 뭐해~`}</div>
+					<div>{`나 ${allAnswer[0]}는/은 오늘 기분이 ${allAnswer[3]}. 말해 뭐해~`}</div>
 					<div>{allAnswer[4] && `나의 굶주린 배를 채워준 것은 ${allAnswer[4]}! 이런 게 인생이지, 하하.`}</div>
 					{allAnswer[2] && allAnswer[2] === null ? (
 						<div>{`아무도 안 만났고, 지금은 ${allAnswer[5]}에 있어.`}</div>
