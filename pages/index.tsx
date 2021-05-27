@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { useRecoilState } from 'recoil';
+import { useResetRecoilState } from 'recoil';
 import { allAnswerState } from '../states';
+import { MainLogo, BigCircle, SmallCircle } from '../public/assets/images';
 
 const MainWrap = styled.div`
 	height: 100vh;
@@ -104,15 +105,14 @@ const HomeSmallBackground = styled.img`
 `;
 
 function Main() {
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
+	const resetAllAnswer = useResetRecoilState(allAnswerState);
 
 	return (
 		<MainWrap>
 			<div className="header">
 				<section className="container">
-					<img src="/assets/images/MainLogo.png" alt="" width={200} height={200} />
+					<MainLogo />
 					<div className="main_titles">
-						{/* <div className="main__title">오늘 뭐했붕어?</div> */}
 						<img
 							style={{ marginTop: '24px', height: '60px', marginBottom: '48px' }}
 							src="/assets/images/main-title.svg"
@@ -122,13 +122,15 @@ function Main() {
 						</div>
 						<div className="main__title--sub2">내용 추가 예정!</div>
 					</div>
-					<Link href="/question" onClick={() => setAllAnswer({})}>
-						<a className="game__start">시작하기</a>
+					<Link href="/question">
+						<a className="game__start" onClick={resetAllAnswer}>
+							시작하기
+						</a>
 					</Link>
 				</section>
 			</div>
-			<HomeSmallBackground src="/assets/images/bg_sm_circle.svg" />
-			<HomeBigBackground src="/assets/images/bg_big_circle.svg" />
+			<HomeSmallBackground src={SmallCircle} />
+			<HomeBigBackground src={BigCircle} />
 		</MainWrap>
 	);
 }

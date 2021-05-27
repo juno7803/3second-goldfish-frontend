@@ -81,7 +81,7 @@ interface Props {
 
 const WhoMeetQuestion = ({ question, random }: Props) => {
 	const [show, setShow] = useState(false);
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
+	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
 	const [counter, setCounter] = useState(3);
 	const router = useRouter();

@@ -74,7 +74,7 @@ const InputQuestion = ({ question, random }: Props) => {
 	const router = useRouter();
 	const currentInputAnswer = useInput();
 	const [counter, setCounter] = useState(3);
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState) as any;
+	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
 	const [questionNum, setQuestionNum] = useRecoilState(questionNumState);
 	const inputRef = React.useRef<HTMLInputElement>(null);
 
