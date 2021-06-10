@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { postGroup } from '../../lib/api/post';
-import { MainLogo } from '../../public/assets/images';
 
 const ModalWrapper = styled.div`
 	.modal-overlay {
@@ -145,44 +143,31 @@ const ModalWrapper = styled.div`
 	}
 `;
 
-const AddNewGroup = ({ subModalOpen, setSubModalOpen }) => {
-	const [value, setValue] = useState('');
-	const handleChange = e => {
-		setValue(e.target.value);
-	};
-
-	const handleConfirm = async () => {
-		await postGroup({ groupName: value });
-	};
-
-	const handleCancel = e => {
+const AddNewGroup = () => {
+	const handleConfirm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		e.preventDefault();
-		setSubModalOpen(false);
 	};
 
-	// if (!subModalOpen) return null;
+	const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		e.preventDefault();
+	};
+
 	return (
 		<ModalWrapper>
 			<div className="modal-overlay">
 				<div className="modal">
 					<div className="modal-form">
 						<div className="modal-form__title">새 그룹에 추가</div>
-						<img src={MainLogo} alt="mainlogo" />
-						<div class="group-form">
+						<Image src="/assets/images/MainLogo.png" alt="" width="158px" height="158px" />
+						<div className="group-form">
 							그룹명
 							<br />
-							<input
-								type="text"
-								class="form-control"
-								value={value}
-								onChange={handleChange}
-								placeholder="그룹명을 입력하세요."
-							/>
+							<input type="text" className="form-control" placeholder="그룹명을 입력하세요." />
 						</div>
-						<div class="group-detail-form">
+						<div className="group-detail-form">
 							그룹 설명
 							<br />
-							<textarea class="form-control-detail" placeholder="그룹 설명을 입력하세요." />
+							<textarea className="form-control-detail" placeholder="그룹 설명을 입력하세요." />
 						</div>
 						<div className="modal-buttons">
 							<button onClick={handleConfirm} className="modal-buttons__confirm">

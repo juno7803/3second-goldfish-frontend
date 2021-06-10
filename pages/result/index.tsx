@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { convertHtmlToPng } from '../../lib/utils/convertHtmlToPng';
 import { allAnswerState } from '../../states';
 import { Router, useRouter } from 'next/router';
 import Modal from '../../components/result/Modal';
+import { SmallFish } from '../../public/assets/images';
 
 const Styled = {
 	ImageWrapper: styled.div`
@@ -107,9 +108,9 @@ const resultData = {
 };
 
 function Result() {
-	const [memoryImage, setMemoryImage] = React.useState(undefined);
+	const [memoryImage, setMemoryImage] = React.useState<HTMLImageElement | undefined>(undefined);
 	const memoryImageRef = React.useRef(null);
-	const [allAnswer, setAllAnswer] = useRecoilState(allAnswerState);
+	const allAnswer = useRecoilValue(allAnswerState);
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
 	const router = useRouter();
 
@@ -146,7 +147,7 @@ function Result() {
 					<div>{allAnswer[6] && `오늘 하루도 ${allAnswer[6]}.`}</div>
 				</div>
 			</div>
-			<img src="/assets/images/SmallFish.svg" alt="" />
+			<SmallFish />
 		</Styled.ImageWrapper>
 	);
 
